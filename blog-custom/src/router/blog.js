@@ -2,11 +2,11 @@
  * @Author: jinqing
  * @Date: 2021-10-28 15:53:13
  * @LastEditors: jinqing
- * @LastEditTime: 2021-10-28 19:39:05
+ * @LastEditTime: 2021-10-29 11:56:58
  * @Description: blog
  */
 
-const { getList, getDetail, newBlog, updateBlog } = require('../controller/blog');
+const { getList, getDetail, newBlog, updateBlog, delBlog } = require('../controller/blog');
 const { SuccessModel, ErrorModel } = require('../model/resModel');
 
 const handleBlogRouter = (req, res) => {
@@ -40,9 +40,13 @@ const handleBlogRouter = (req, res) => {
   }
 
   if (method === 'POST' && req.path === '/api/blog/delete') {
-    return {
-      msg: '这是删除博客的接口',
-    };
+    
+    const result = delBlog(id)
+    if(result) {
+      return new SuccessModel(result)
+    } else {
+      return new ErrorModel('删除博客失败')
+    }
   }
 };
 

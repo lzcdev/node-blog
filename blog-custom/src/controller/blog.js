@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-10-28 16:28:25
  * @LastEditors: jinqing
- * @LastEditTime: 2021-10-28 19:38:06
+ * @LastEditTime: 2021-10-29 11:55:58
  * @Description: blog
  */
 
@@ -49,6 +49,10 @@ const newBlog = (blogData = {}) => {
 };
 
 const updateBlog = (id, blogData = {}) => {
-  return false
+  return true
 };
-module.exports = { getList, getDetail, newBlog, updateBlog };
+
+const delBlog = (id) => {
+  return true
+};
+module.exports = { getList, getDetail, newBlog, updateBlog, delBlog };
