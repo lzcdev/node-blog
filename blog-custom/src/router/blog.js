@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-10-28 15:53:13
  * @LastEditors: jinqing
- * @LastEditTime: 2021-11-05 17:15:01
+ * @LastEditTime: 2021-11-05 17:45:21
  * @Description: blog
  */
 
@@ -25,13 +25,21 @@ const handleBlogRouter = (req, res) => {
   }
 
   if (method === 'GET' && req.path === '/api/blog/detail') {
-    const data = getDetail(id);
-    return new SuccessModel(data);
+    // const data = getDetail(id);
+    // return new SuccessModel(data);
+    const result = getDetail(id);
+    return result.then((data) => {
+      return new SuccessModel(data);
+    });
   }
 
   if (method === 'POST' && req.path === '/api/blog/new') {
-    const data = newBlog(req.body);
-    return new SuccessModel(data);
+    // const data = newBlog(req.body);
+    req.body.author = 'lzc';
+    const result = newBlog(req.body);
+    return result.then((data) => {
+      return new SuccessModel(data);
+    });
   }
 
   if (method === 'POST' && req.path === '/api/blog/update') {
