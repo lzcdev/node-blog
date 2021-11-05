@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-10-28 15:53:13
  * @LastEditors: jinqing
- * @LastEditTime: 2021-10-29 11:56:58
+ * @LastEditTime: 2021-11-05 17:15:01
  * @Description: blog
  */
 
@@ -14,10 +14,14 @@ const handleBlogRouter = (req, res) => {
   const id = req.query.id;
 
   if (method === 'GET' && req.path === '/api/blog/list') {
-    const author = req.query.author;
-    const keyword = req.query.keyword;
-    const listData = getList(author, keyword);
-    return new SuccessModel(listData);
+    const author = req.query.author || '';
+    const keyword = req.query.keyword || '';
+    // const listData = getList(author, keyword);
+    // return new SuccessModel(listData);
+    const result = getList(author, keyword);
+    return result.then((listData) => {
+      return new SuccessModel(listData);
+    });
   }
 
   if (method === 'GET' && req.path === '/api/blog/detail') {
@@ -40,12 +44,11 @@ const handleBlogRouter = (req, res) => {
   }
 
   if (method === 'POST' && req.path === '/api/blog/delete') {
-    
-    const result = delBlog(id)
-    if(result) {
-      return new SuccessModel(result)
+    const result = delBlog(id);
+    if (result) {
+      return new SuccessModel(result);
     } else {
-      return new ErrorModel('删除博客失败')
+      return new ErrorModel('删除博客失败');
     }
   }
 };

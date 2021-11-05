@@ -2,34 +2,22 @@
  * @Author: jinqing
  * @Date: 2021-10-28 16:28:25
  * @LastEditors: jinqing
- * @LastEditTime: 2021-10-29 11:55:58
+ * @LastEditTime: 2021-11-05 17:10:04
  * @Description: blog
  */
 
-const getList = (auth, keyword) => {
-  return [
-    {
-      id: 1,
-      title: '标题A',
-      content: '内容A',
-      createTime: 1635409813717,
-      author: 'zhangsan',
-    },
-    {
-      id: 2,
-      title: '标题B',
-      content: '内容B',
-      createTime: 1635409870651,
-      author: '李四',
-    },
-    {
-      id: 3,
-      title: '标题C',
-      content: '内容C',
-      createTime: 1635409896586,
-      author: '王五',
-    },
-  ];
+const { exec } = require('../db/mysql');
+
+const getList = (author, keyword) => {
+  let sql = `select * from blogs where 1=1 `;
+  if (author) {
+    sql += `and author='${author}' `;
+  }
+  if (keyword) {
+    sql += `and title like '%${keyword}' `;
+  }
+  sql += `order by createtime desc;`;
+  return exec(sql);
 };
 
 const getDetail = (id) => {
@@ -49,10 +37,10 @@ const newBlog = (blogData = {}) => {
 };
 
 const updateBlog = (id, blogData = {}) => {
-  return true
+  return true;
 };
 
 const delBlog = (id) => {
-  return true
+  return true;
 };
 module.exports = { getList, getDetail, newBlog, updateBlog, delBlog };

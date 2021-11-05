@@ -2,12 +2,12 @@
  * @Author: jinqing
  * @Date: 2021-11-02 17:03:34
  * @LastEditors: jinqing
- * @LastEditTime: 2021-11-02 17:07:00
+ * @LastEditTime: 2021-11-05 17:22:55
  * @Description: mysql
  */
 
 const mysql = require('mysql');
-const { MYSQL_CONF } = require('../conf/db');
+const MYSQL_CONF = require('../conf/db');
 
 const con = mysql.createConnection(MYSQL_CONF);
 con.connect();
@@ -24,4 +24,4 @@ const exec = (sql) => {
   });
 };
 
-module.exports = exec;
+module.exports = { exec };

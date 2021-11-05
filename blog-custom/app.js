@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-10-28 11:55:42
  * @LastEditors: jinqing
- * @LastEditTime: 2021-10-28 19:25:48
+ * @LastEditTime: 2021-11-05 17:17:48
  * @Description: app
  */
 
@@ -47,9 +47,11 @@ const serverHandle = (req, res) => {
     req.body = postData;
 
     // 处理 blog 路由
-    const blogData = handleBlogRouter(req, res);
-    if (blogData) {
-      res.end(JSON.stringify(blogData));
+    const blogResult = handleBlogRouter(req, res);
+    if (blogResult) {
+      blogResult.then((blogData) => {
+        res.end(JSON.stringify(blogData));
+      });
       return;
     }
 
