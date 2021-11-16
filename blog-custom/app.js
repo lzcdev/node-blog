@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-10-28 11:55:42
  * @LastEditors: jinqing
- * @LastEditTime: 2021-11-05 17:17:48
+ * @LastEditTime: 2021-11-16 15:37:52
  * @Description: app
  */
 
@@ -55,9 +55,17 @@ const serverHandle = (req, res) => {
       return;
     }
 
-    const userData = handleUserRouter(req, res);
-    if (userData) {
-      res.end(JSON.stringify(userData));
+    // const userData = handleUserRouter(req, res);
+    // if (userData) {
+    //   res.end(JSON.stringify(userData));
+    //   return;
+    // }
+
+    const userResult = handleUserRouter(req, res);
+    if (userResult) {
+      userResult.then((userData) => {
+        res.end(JSON.stringify(userData));
+      });
       return;
     }
 
